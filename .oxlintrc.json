@@ -1,0 +1,108 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "import", "unicorn", "promise", "jest"],
+  "categories": {
+    "correctness": "error",
+    "perf": "warn",
+    "style": "warn",
+    "pedantic": "warn"
+  },
+  "rules": {
+    "curly": "off",
+    "new-cap": "off",
+    "no-named-export": "off",
+    "import/prefer-default-export": "off",
+    "sort-keys": "off",
+    "typescript/parameter-properties": "off",
+    "unicorn/prefer-top-level-await": "off",
+    "jest/require-hook": "off",
+    "no-void": "error",
+    "tsconfig-error": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "no-unused-vars": "error",
+    "eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "typescript/no-explicit-any": "warn",
+    "unicorn/no-array-reduce": "warn",
+    "unicorn/prefer-module": "error",
+    "sort-imports": "off",
+    "typescript/consistent-type-imports": [
+      "error",
+      {
+        "disallowTypeAnnotations": true
+      }
+    ],
+    "max-statements": "off",
+    "no-ternary": "off",
+    "typescript/strict-boolean-expressions": "off",
+    "import/group-exports": "off",
+    "import/consistent-type-specifier-style": "off",
+    "id-length": "off",
+    "no-null": "off",
+    "import/no-namespace": "off",
+    "max-lines-per-function": "off",
+    "import/no-anonymous-default-export": "off",
+    "import/exports-last": "off",
+    "max-params": "off",
+    "import/max-dependencies": "off",
+    "import/no-nodejs-modules": "off",
+    "no-continue": "off",
+    "max-lines": "off",
+    "capitalized-comments": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.spec.ts", "test/**/*.test.ts"],
+      "rules": {
+        "jest/require-hook": "error",
+        "jest/prefer-lowercase-title": "off",
+        "jest/no-hooks": "off",
+        "typescript/no-floating-promises": [
+          "error",
+          {
+            "allowForKnownSafeCalls": [
+              {
+                "from": "package",
+                "name": ["describe", "test", "it", "beforeEach", "afterEach"],
+                "package": "node:test"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["migrations/**/*.ts", "seeds/**/*.ts"],
+      "rules": {
+        "unicorn/filename-case": "off"
+      }
+    }
+  ],
+  "settings": {
+    "typescript": {
+      "tsconfigRootDir": ".",
+      "project": ["./tsconfig.json"]
+    }
+  },
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "ignorePatterns": [
+    "node_modules/**",
+    "dist/**",
+    "tsconfig.json",
+    "tsconfig.build.json",
+    "src/database/types/db.d.ts"
+  ]
+}

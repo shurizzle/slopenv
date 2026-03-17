@@ -1,0 +1,42 @@
+name: Check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: |
+          set -eux
+          npm ci --include=dev --no-audit --no-fund
+
+      - name: Check
+        run: |
+          set -eux
+          npm run check:ci
+
+      - name: Build
+        run: |
+          set -eux
+          npm run build

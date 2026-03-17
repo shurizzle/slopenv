@@ -1,0 +1,62 @@
+{
+  "name": "slopenv",
+  "version": "1.0.0",
+  "description": "Sensible environment variable loading for monorepos.",
+  "keywords": [
+    "dotenv",
+    "env",
+    "monorepo",
+    "config",
+    "precedence",
+    "environment-variables"
+  ],
+  "homepage": "https://github.com/shurizzle/slopenv#readme",
+  "bugs": {
+    "url": "https://github.com/shurizzle/slopenv/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shurizzle/slopenv.git"
+  },
+  "license": "MIT",
+  "author": "shurizzle <me@shurizzle.dev>",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "tsx --test test/**/*.test.ts",
+    "lint": "oxlint",
+    "lint:ci": "oxlint --deny-warnings",
+    "check": "oxfmt --check && npm run lint",
+    "check:ci": "oxfmt --check && npm run lint:ci",
+    "build": "tsup --tsconfig ./tsconfig.build.json src/index.ts --format cjs,esm --dts --clean",
+    "prepare": "npm run build",
+    "dev": "tsup --tsconfig ./tsconfig.app.json src/index.ts --format cjs,esm --watch --dts"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "globals": "^17.4.0",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
+    "oxlint-tsgolint": "^0.17.0",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
