@@ -1,6 +1,6 @@
 {
   "name": "slopenv",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sensible environment variable loading for monorepos.",
   "keywords": [
     "dotenv",

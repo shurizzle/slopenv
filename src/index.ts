@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import afs from 'node:fs/promises';
 import path from 'node:path';
 
-export { DotenvParseOutput } from 'dotenv';
+export type { DotenvParseOutput } from 'dotenv';
 
 const isSafeName = (name: string): boolean =>
   // oxlint-disable-next-line no-control-regex
