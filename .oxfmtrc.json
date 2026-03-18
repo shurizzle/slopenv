@@ -15,5 +15,13 @@
       "unknown"
     ]
   },
-  "ignorePatterns": ["dist/**/*"]
+  "ignorePatterns": ["dist/**/*"],
+  "overrides": [
+    {
+      "files": ["**/*.yml"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
