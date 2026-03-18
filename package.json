@@ -1,6 +1,6 @@
 {
   "name": "slopenv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sensible environment variable loading for monorepos.",
   "keywords": [
     "dotenv",
@@ -30,6 +30,9 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "slopenv": "./dist/slopenv.js"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -46,9 +49,9 @@
     "lint:ci": "oxlint --deny-warnings",
     "check": "oxfmt --check && npm run lint",
     "check:ci": "oxfmt --check && npm run lint:ci",
-    "build": "tsup --tsconfig ./tsconfig.build.json src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsup --tsconfig ./tsconfig.build.json src/index.ts src/slopenv.ts --format cjs,esm --dts --clean && node scripts/fix-perms.mjs",
     "prepare": "npm run build",
-    "dev": "tsup --tsconfig ./tsconfig.app.json src/index.ts --format cjs,esm --watch --dts"
+    "dev": "tsup --tsconfig ./tsconfig.app.json src/index.ts src/slopenv.ts --format cjs,esm --watch --dts"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
