@@ -44,8 +44,8 @@
     }
   },
   "scripts": {
-    "test": "tsx --test test/**/*.test.ts",
-    "test:watch": "tsx --test --watch test/**/*.test.ts",
+    "test": "node --import @oxc-node/core/register --test test/**/*.test.ts",
+    "test:watch": "node --import @oxc-node/core/register --test --watch test/**/*.test.ts",
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "lint": "oxlint",
@@ -53,19 +53,18 @@
     "typecheck": "tsc --noEmit",
     "check": "concurrently --kill-others-on-fail npm:format:check npm:lint npm:typecheck",
     "check:ci": "concurrently --kill-others-on-fail npm:format:check npm:lint:ci npm:typecheck",
-    "build": "tsup --tsconfig ./tsconfig.build.json src/index.ts src/slopenv.ts --format cjs,esm --dts --clean && node scripts/fix-perms.mjs",
+    "build": "tsdown --tsconfig tsconfig.build.json --config-loader unrun",
     "prepare": "npm run build",
-    "dev": "tsup --tsconfig ./tsconfig.app.json src/index.ts src/slopenv.ts --format cjs,esm --watch --dts"
+    "dev": "tsdown --tsconfig tsconfig.app.json --config-loader unrun -w"
   },
   "devDependencies": {
+    "@oxc-node/core": "^0.0.35",
     "@types/dotenv": "^6.1.1",
     "concurrently": "^9.2.1",
-    "globals": "^17.4.0",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.56.0",
     "oxlint-tsgolint": "^0.17.0",
-    "tsup": "^8.5.1",
-    "tsx": "^4.21.0",
+    "tsdown": "^0.21.4",
     "typescript": "^5.9.3"
   },
   "dependencies": {
