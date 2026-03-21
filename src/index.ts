@@ -50,14 +50,12 @@ const runAsync = async <T>(gen: Generator<FileOp, T, unknown>): Promise<T> => {
       let res: boolean | string = false;
       if (op.type === 'exists') {
         try {
-          // oxlint-disable-next-line no-await-in-loop
           await afs.access(op.path, afs.constants.F_OK);
           res = true;
         } catch {
           res = false;
         }
       } else {
-        // oxlint-disable-next-line no-await-in-loop
         res = await afs.readFile(op.path, 'utf8');
       }
       next = gen.next(res);
@@ -138,7 +136,9 @@ const detectMonorepoFlow = function* detectMonorepoFlow(
         if (pkg.workspaces) {
           return { type: 'npm', rootDir: currentDir };
         }
-      } catch {}
+      } catch {
+        // Ignore error
+      }
     }
 
     const parent = path.dirname(currentDir);

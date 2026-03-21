@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// oxlint-disable import/no-nodejs-modules, no-magic-numbers, no-console
+// oxlint-disable no-console
 import { spawn } from 'node:child_process';
 
 import { config } from './index';
